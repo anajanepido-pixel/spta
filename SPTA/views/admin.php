@@ -3,39 +3,50 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Carwash</title>
-  <link rel="icon" type="image/x-icon" href="../img/logo.png">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheets" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>School Payment Dashboard</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
     body {
-      overflow-x: hidden;
+      display: flex;
+      background: #f4f6f9;
     }
 
+    /* Sidebar */
     .sidebar {
-      background-color: #386641;
-      height: 100vh;
+      width: 300px;
+      height: 110vh;
+      background: #386641;
       color: white;
-      text-decoration: none;
-      padding: 10px;
-      display: block;
+      padding: 20px;
     }
 
-    .sidebar a:hover {
-      background-color: #495057;
+    .sidebar h2 {
+      margin-bottom: 30px;
     }
 
-    .topbar {
-      height: 60px;
-      background-color: white;
+    .sidebar ul {
+      list-style: none;
     }
 
-    .table-container {
-      max-height: 500px;
-      overflow-y: auto;
-      text-align: center;
+    .sidebar ul li {
+      padding: 12px 0;
+      cursor: pointer;
+    }
+
+    .sidebar ul li:hover {
+      background: #334155;
+      padding-left: 10px;
+      transition: 0.3s;
     }
 
     .container {
@@ -49,49 +60,6 @@
       height: 110px;
     }
 
-    /* CONTENT */
-    .content {
-      padding: 25px;
-    }
-
-    .content h2 {
-      font-size: 35px;
-      margin-bottom: 30px;
-    }
-
-    /* SUMMARY BOXES */
-    .summary-boxes {
-      display: flex;
-      justify-content: space-around;
-      margin-bottom: 50px;
-    }
-
-    .box {
-      width: 250px;
-      border: 2px solid gray;
-      border-radius: 15px;
-      padding: 25px;
-      text-align: center;
-      background: #f9f9f9;
-    }
-
-    .box h3 {
-      font-size: 22px;
-      margin-bottom: 15px;
-    }
-
-    .box p {
-      font-size: 28px;
-      font-weight: bold;
-    }
-
-    /* BOTTOM SECTION */
-    .bottom-section {
-      display: flex;
-      justify-content: space-between;
-      gap: 30px;
-    }
-
     /* RECENT PAYMENTS */
     .recent-payments {
       flex: 2;
@@ -103,7 +71,7 @@
     }
 
     table {
-      width: 100%;
+      width: 70px;
       border-collapse: collapse;
       border: 2px solid gray;
       border-radius: 10px;
@@ -122,9 +90,99 @@
       background: #f2f2f2;
     }
 
+    /*table*/
+    .table-container {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table th,
+    table td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    table th {
+      background: #52796f;
+      color: white;
+    }
+
+    table tr:nth-child(even) {
+      background: #f1f5f9;
+    }
+
+
+
+    /* Main */
+    .main {
+      flex: 1;
+      padding: 20px;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: #386641;
+      padding: 30px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    }
+
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 22px;
+      font-weight: bold;
+      color: #2563eb;
+    }
+
+    /* Charts */
+    .charts {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+
+    .chart-container {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    canvas {
+      width: 100% !important;
+      height: 300px !important;
+    }
+
     /* STATUS COLORS */
     .paid {
-      background: #6ea93a;
+      background: #16a34a;
       color: white;
       font-weight: bold;
     }
@@ -140,120 +198,57 @@
       color: white;
       font-weight: bold;
     }
-
-    /* QUICK ACTIONS */
-    .quick-actions {
-      flex: 1;
-    }
-
-    .quick-actions h3 {
-      font-size: 28px;
-      margin-bottom: 15px;
-      text-align: center;
-    }
-
-    .quick-actions button {
-      width: 50%;
-      padding: 18px;
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      border: 2px solid gray;
-      border-radius: 10px;
-      background: white;
-      cursor: pointer;
-
-    }
-
-    .quick-actions button:hover {
-      background: #eaeaea;
-    }
   </style>
-
-  <!-- Custom styles for this template -->
-  <link href="../assets/dist/css/home.css" rel="stylesheet">
 </head>
-
 
 <body>
 
-
-  <!-- Main Container -->
-  <div class="row">
-    <!-- Sidebar -->
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block ">
-      <div class="sidebar">
-        <center>
-          <div class="logo">
-            <img src="../img/pawing_logo_circle_no_bg.png" alt="Logo">
-          </div>
-        </center>
-        <hr>
-        <a href="../admin/Dashboard.php">Home</a>
-        <a href="../admin/Dashboard.php">Peyments</a>
-        <a href="../admin/addcarwash_booking.php">Students</a>
-        <a href="../admin/Dashboard.php">Reporst</a>
-
-
-        <button class="dropdown-btn">
-          Dashboard
-          <span class="caret">▶</span>
-        </button>
-
-
-        <button class="dropdown-btn" style="margin-top: 350px;">
-          Settings
-          <span class="caret">▶</span>
-        </button>
-        <div class="dropdown-container">
-          <a href="../admin/settings.php">Settings</a>
-          <a href="../views/home.php">Sign Out</a>
-        </div>
+  <div class="sidebar">
+    <center>
+      <div class="logo">
+        <img src="../img/pawing_logo_circle_no_bg.png" alt="Logo">
       </div>
 
-    </nav>
+      <h2>Admin Panel</h2>
+    </center>
+    <ul>
+      <li>Home</li>
+      <li>Students</li>
+      <li>Payments</li>
+      <li>Reports</li>
+      <li>Setting</li>
+    </ul>
+  </div>
 
-    <link rel="stylesheet" href="../assets/dist/css/admin.css">
+  <div class="main">
+    <div class="navbar" style="color:white; height:80px; font-size:30px; display: flex; justify-content: center; align-items: center;">
+      Pawing Central School System
+    </div>
 
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-
-      <div class="boxes">
-        <center>
-          <p><b>Pawing Central School System</b></p>
-        </center>
+    <div class="cards">
+      <div class="card">
+        <h3>Total Students</h3>
+        <p>135</p>
       </div>
-
-      <br>
-      <h2 class="text-align: left;"><b>Admin Dashboard</b></h2>
-      <BR><BR><br>
-
-      <!-- SUMMARY BOXES -->
-      <div class="summary-boxes">
-
-        <div class="box">
-          <h3>Total Students</h3>
-          <p>350</p>
-        </div>
-
-        <div class="box">
-          <h3>Paid Students</h3>
-          <p>280</p>
-        </div>
-
-        <div class="box">
-          <h3>Pending Payments</h3>
-          <p>70</p>
-        </div>
-
+      <div class="card">
+        <h3>Total Payments</h3>
+        <p>₱120,000</p>
       </div>
+      <div class="card">
+        <h3>Pending Payments</h3>
+        <p>32</p>
+      </div>
+      <div class="card">
+        <h3>School Year</h3>
+        <p>2025-2026</p>
+      </div>
+    </div>
 
-      <!-- BOTTOM SECTION -->
-      <div class="bottom-section">
+    <div class="bottom-section">
+      <div class="recent-payments">
+        <h3>Recent Payments</h3>
 
-        <!-- RECENT PAYMENTS -->
-        <div class="recent-payments">
-          <h3>Recent Payments</h3>
-
+        <div class=" card">
           <table>
             <thead>
               <tr>
@@ -289,37 +284,91 @@
 
           </table>
         </div>
-
-        <!-- QUICK ACTIONS -->
-        <div class="quick-actions">
-          <h3>Quick Actions</h3>
-          <center>
-            <button> <a href="../admin/addstudent.php">+ Add Student </a></button>
-            <button>+ Record Payment</button>
-            <button>View Reports</button>
-        </div>
-        </center>
       </div>
+      <br><br>
 
-  </div>
 
-  </div>
+      <div class="charts">
+        <div class="chart-container">
+          <h3>Monthly Payment Collection</h3>
+          <canvas id="barChart"></canvas>
+        </div>
 
-  <script>
-    // Dropdown toggle
-    const dropdowns = document.querySelectorAll(".dropdown-btn");
-    dropdowns.forEach(btn => {
-      btn.addEventListener("click", function() {
-        this.classList.toggle("active");
-        const dropdown = this.nextElementSibling;
-        const caret = this.querySelector(".caret");
-        if (dropdown.style.display === "block") {
-          dropdown.style.display = "none";
-          caret.classList.remove("rotate");
-        } else {
-          dropdown.style.display = "block";
-          caret.classList.add("rotate");
+        <div class="chart-container">
+          <h3>Payment Status</h3>
+          <canvas id="pieChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Bar Chart
+      new Chart(document.getElementById("barChart"), {
+        type: "bar",
+        data: {
+          labels: ["Jan", "Feb", "Mar", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          datasets: [{
+            label: "Amount Collected (₱)",
+            data: [15000, 20000, 18000, 22000, 25000, 20000, 15000, 20000, 18000, 22000, ],
+            backgroundColor: "#355e4a"
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              labels: {
+                color: "#000000"
+              }
+            },
+            title: {
+              display: true,
+              text: "Monthly Payment Collection",
+              color: "#000"
+            }
+          },
+          scales: {
+            x: {
+              ticks: {
+                color: "#6c757d"
+              },
+              grid: {
+                color: "#6c757d"
+              }
+
+            },
+            y: {
+              ticks: {
+                color: "#6c757d"
+              },
+              grid: {
+                color: "#6c757d"
+              }
+
+            }
+          }
         }
       });
-    });
-  </script>
+      // Pie Chart
+      new Chart(document.getElementById("pieChart"), {
+        type: "pie",
+        data: {
+          labels: ["Paid", "Pending", "Overdue"],
+          datasets: [{
+            data: [70, 20, 10],
+            backgroundColor: [
+              "#16a34a",
+              "#facc15",
+              "#dc2626"
+            ]
+          }]
+        },
+        options: {
+          responsive: true
+        }
+      });
+    </script>
+
+</body>
+
+</html>

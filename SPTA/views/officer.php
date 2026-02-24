@@ -15,7 +15,7 @@
         }
 
         .sidebar {
-            background-color: #386641;
+            background-color: #12664f;
             height: 100vh;
             color: white;
             text-decoration: none;

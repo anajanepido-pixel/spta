@@ -11,170 +11,533 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #dcefe1;
+        :root {
+            --primary-color: #4EA685;
+            --secondary-color: #57B894;
+            --black: #000000;
+            --white: #ffffff;
+            --gray: #efefef;
+            --gray-2: #757575;
 
+            --facebook-color: #4267B2;
+            --google-color: #DB4437;
+            --twitter-color: #1DA1F2;
+            --insta-color: #E1306C;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600&display=swap');
+
+        * {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100vh;
+            overflow: hidden;
         }
 
         .container {
-            width: 550px;
-            margin: 50px auto;
-            border: 2px solid black;
-            border-radius: 20px;
-            padding: 20px;
-            background: #f2fbf4;
-            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            overflow: hidden;
         }
 
-        /* Logo circle */
-        .logo {
-            width: 120px;
-            height: 120px;
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            height: 100vh;
+        }
 
-            border-radius: 50%;
+        .col {
+            width: 50%;
+        }
+
+        .align-items-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            line-height: 90px;
-            font-weight: bold;
-            position: absolute;
-            top: 20px;
-            left: 20px;
         }
 
-        /* Title */
-        .title {
-            text-align: center;
-            font-size: 20px;
-            font-weight: bold;
+        .form-wrapper {
+            width: 100%;
+            max-width: 28rem;
         }
 
-        .subtitle {
-            text-align: center;
-            margin-top: 10px;
-            font-size: 15px;
-            font-weight: bold;
+        .form {
+            padding: 1rem;
+            background-color: var(--white);
+            border-radius: 1.5rem;
+            width: 100%;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            transform: scale(0);
+            transition: .5s ease-in-out;
+            transition-delay: 1s;
         }
 
-        /* Login form */
-        .form-section {
-            margin-top: 60px;
-            padding-left: 20px;
-        }
-
-        .form-section label {
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        .radio-group {
-            margin-top: 10px;
-            margin-left: 50px;
-        }
-
-        .radio-group input {
-            margin-right: 10px;
-        }
-
-        .radio-group div {
-            margin: 12px 0;
-            font-size: 15px;
-        }
-
-        /* Inputs */
         .input-group {
-            margin-top: 30px;
+            position: relative;
+            width: 100%;
+            margin: 1rem 0;
         }
 
-        .input-group label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: bold;
+        .input-group i {
+            position: absolute;
+            top: 50%;
+            left: 1rem;
+            transform: translateY(-50%);
+            font-size: 1.4rem;
+            color: var(--gray-2);
         }
 
         .input-group input {
-            width: 80%;
-            padding: 10px;
-            border: 2px solid black;
-            border-radius: 4px;
-            font-size: 15px;
+            width: 100%;
+            padding: 1rem 3rem;
+            font-size: 1rem;
+            background-color: var(--gray);
+            border-radius: .5rem;
+            border: 0.125rem solid var(--white);
+            outline: none;
         }
 
-        /* Login button */
-        .btn-login {
-            margin-top: 20px;
-            float: right;
-            padding: 10px 25px;
-            background: #24513a;
-            color: white;
-            border: 2px solid black;
-            border-radius: 5px;
-            font-weight: bold;
+        .input-group input:focus {
+            border: 0.125rem solid var(--primary-color);
+        }
+
+        .form button {
+            cursor: pointer;
+            width: 100%;
+            padding: .6rem 0;
+            border-radius: .5rem;
+            border: none;
+            background-color: var(--primary-color);
+            color: var(--white);
+            font-size: 1.2rem;
+            outline: none;
+        }
+
+        .form p {
+            margin: 1rem 0;
+            font-size: .7rem;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .social-list {
+            margin: 2rem 0;
+            padding: 1rem;
+            border-radius: 1.5rem;
+            width: 100%;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            transform: scale(0);
+            transition: .5s ease-in-out;
+            transition-delay: 1.2s;
+        }
+
+        .social-list>div {
+            color: var(--white);
+            margin: 0 .5rem;
+            padding: .7rem;
+            cursor: pointer;
+            border-radius: .5rem;
+            cursor: pointer;
+            transform: scale(0);
+            transition: .5s ease-in-out;
+        }
+
+        .social-list>div:nth-child(1) {
+            transition-delay: 1.4s;
+        }
+
+        .social-list>div:nth-child(2) {
+            transition-delay: 1.6s;
+        }
+
+        .social-list>div:nth-child(3) {
+            transition-delay: 1.8s;
+        }
+
+        .social-list>div:nth-child(4) {
+            transition-delay: 2s;
+        }
+
+        .social-list>div>i {
+            font-size: 1.5rem;
+            transition: .4s ease-in-out;
+        }
+
+        .social-list>div:hover i {
+            transform: scale(1.5);
+        }
+
+        .facebook-bg {
+            background-color: var(--facebook-color);
+        }
+
+        .google-bg {
+            background-color: var(--google-color);
+        }
+
+        .twitter-bg {
+            background-color: var(--twitter-color);
+        }
+
+        .insta-bg {
+            background-color: var(--insta-color);
+        }
+
+        .pointer {
             cursor: pointer;
         }
 
-        .btn-login:hover {
-            background: #0b65c2;
+        .container.sign-in .form.sign-in,
+        .container.sign-in .social-list.sign-in,
+        .container.sign-in .social-list.sign-in>div,
+        .container.sign-up .form.sign-up,
+        .container.sign-up .social-list.sign-up,
+        .container.sign-up .social-list.sign-up>div {
+            transform: scale(1);
         }
 
-        /* Footer */
-        .footer {
+        .content-row {
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 6;
+            width: 100%;
+        }
+
+        .text {
+            margin: 4rem;
+            color: var(--white);
+        }
+
+        .text h2 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin: 2rem 0;
+            transition: 1s ease-in-out;
+        }
+
+        .text p {
+            font-weight: 600;
+            transition: 1s ease-in-out;
+            transition-delay: .2s;
+        }
+
+        .img img {
+            width: 30vw;
+            transition: 1s ease-in-out;
+            transition-delay: .4s;
+        }
+
+        .text.sign-in h2,
+        .text.sign-in p,
+        .img.sign-in img {
+            transform: translateX(-250%);
+        }
+
+        .text.sign-up h2,
+        .text.sign-up p,
+        .img.sign-up img {
+            transform: translateX(250%);
+        }
+
+        .container.sign-in .text.sign-in h2,
+        .container.sign-in .text.sign-in p,
+        .container.sign-in .img.sign-in img,
+        .container.sign-up .text.sign-up h2,
+        .container.sign-up .text.sign-up p,
+        .container.sign-up .img.sign-up img {
+            transform: translateX(0);
+        }
+
+        /* BACKGROUND */
+
+        .container::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: 300vw;
+            transform: translate(35%, 0);
+            background-image: linear-gradient(-45deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            transition: 1s ease-in-out;
+            z-index: 6;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            border-bottom-right-radius: max(50vw, 50vh);
+            border-top-left-radius: max(50vw, 50vh);
+        }
+
+        .container.sign-in::before {
+            transform: translate(0, 0);
+            right: 50%;
+        }
+
+        .container.sign-up::before {
+            transform: translate(100%, 0);
+            right: 50%;
+        }
+
+        /* RESPONSIVE */
+
+        @media only screen and (max-width: 425px) {
+
+            .container::before,
+            .container.sign-in::before,
+            .container.sign-up::before {
+                height: 100vh;
+                border-bottom-right-radius: 0;
+                border-top-left-radius: 0;
+                z-index: 0;
+                transform: none;
+                right: 0;
+            }
+
+            /* .container.sign-in .col.sign-up {
+        transform: translateY(100%);
+    } */
+
+            .container.sign-in .col.sign-in,
+            .container.sign-up .col.sign-up {
+                transform: translateY(0);
+            }
+
+            .content-row {
+                align-items: flex-start !important;
+            }
+
+            .content-row .col {
+                transform: translateY(0);
+                background-color: unset;
+            }
+
+            .col {
+                width: 100%;
+                position: absolute;
+                padding: 2rem;
+                background-color: var(--white);
+                border-top-left-radius: 2rem;
+                border-top-right-radius: 2rem;
+                transform: translateY(100%);
+                transition: 1s ease-in-out;
+            }
+
+            .row {
+                align-items: flex-end;
+                justify-content: flex-end;
+            }
+
+            .form,
+            .social-list {
+                box-shadow: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .text {
+                margin: 0;
+            }
+
+            .text p {
+                display: none;
+            }
+
+            .text h2 {
+                margin: .5rem;
+                font-size: 2rem;
+            }
+
+        }
+
+        select {
+            width: 300px;
+            border-radius: 20px;
             text-align: center;
-            margin-top: 50px;
-            font-size: 14px;
+            height: 50px;
+            background-color: #f3f3f3ff;
         }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light" style=" background: #2f6f4e;">
-        <a class="navbar-brand" href="#">PCS System</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </nav>
+    <div id="container" class="container">
+        <!-- FORM SECTION -->
+        <div class="row">
+            <!-- SIGN UP -->
+            <div class="col align-items-center flex-col sign-up">
+                <div class="form-wrapper align-items-center">
+                    <form action="../page/authenticate.php?function=register" method="post">
+                        <div class="form sign-up">
+                            <select id="roleSelect" name="role" onchange="changeForm()" required>
+                                <option value="">Select Role</option>
+                                <option value="Teacher">Teacher</option>
+                                <option value="Parent">Parent</option>
+                            </select>
+                            <div id="teacherForm" style="display:none;">
+                                <div class="input-group">
+                                    <input type="text" name="teach_fname" placeholder="First Name">
+                                    <input type="text" name="teach_mname" placeholder="Middle Name">
+                                    <input type="text" name="teach_lname" placeholder="Last Name">
+                                    <input type="text" name="teach_extn" placeholder="Name Ext">
+                                    <input type="email" name="teach_email" placeholder="Email">
+                                    <input type="text" name="teach_contact_no" placeholder="Contact No">
+                                    <input type="text" name="username" placeholder="Username">
+                                    <input type="password" name="password" placeholder="Password">
+                                    <select name="role_T">
+                                        <option value="Admin">Admin</option>
+                                        <option value="Staff">Staff</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="parentForm" style="display:none;">
+                                <div class="input-group">
+                                    <input type="text" name="parent_fname" placeholder="First Name">
+                                    <input type="text" name="parent_mname" placeholder="Middle Name">
+                                    <input type="text" name="parent_lname" placeholder="Last Name">
+                                    <input type="text" name="parent_extn" placeholder="Name Ext">
+                                    <input type="text" name="parent_contact_no" placeholder="Contact No">
+                                    <input type="email" name="parent_email" placeholder="Email">
+                                    <input type="text" name="parent_address" placeholder="Address">
+                                    <select name="parent_relationship">
+                                        <option value="Mother">Mother</option>
+                                        <option value="Father">Father</option>
+                                        <option value="Guardian">Guardian</option>
+                                    </select>
+                                    <input type="text" name="username" placeholder="Username">
+                                    <input type="password" name="password" placeholder="Password">
+                                    <select name="role_p">
+                                        <option value="SPTA Officer">Admin</option>
+                                        <option value="Parent">Staff</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit">
+                                Sign up
+                            </button>
 
-    <div class="container" style="margin-top: 10%;">
-
-        <!-- Logo -->
-        <div class="logo">
-            <img src="../img/pawing_logo_circle_no_bg.png" width="120px" height="120px">
-        </div>
-
-        <!-- Title -->
-        <div class="title">SPTA Payment Management<br>System</div>
-        <div class="subtitle">Secure Login</div>
-
-        <!-- Form -->
-        <div class="form-section">
-
-
-            <form action="../views/admin.php" method="POST">
-                <!-- Username -->
-                <div class="input-group">
-                    <label>Username:</label>
-                    <input type="text" placeholder="">
+                    </form>
+                    <p>
+                        <span>
+                            Already have an account?
+                        </span>
+                        <b onclick="toggle()" class="pointer">
+                            Sign in here
+                        </b>
+                    </p>
                 </div>
-
-                <!-- Password -->
-                <div class="input-group">
-                    <label>Password:</label>
-                    <input type="password" placeholder="">
-                </div>
-
-                <!-- Login Button -->
-                <button class="btn-login">Login</button>
-
-                <div style="clear: both;"></div>
+            </div>
 
         </div>
-
-        <!-- Footer -->
-        <div class="footer">
-            © Pawing Central School
+        <!-- END SIGN UP -->
+        <!-- SIGN IN -->
+        <div class="col align-items-center flex-col sign-in">
+            <div class="form-wrapper align-items-center">
+                <form action="../page/authenticate.php?function=login">
+                    <div class="form sign-in">
+                        <div class="input-group">
+                            <i class='bx bxs-user'></i>
+                            <input type="text" placeholder="Username">
+                        </div>
+                        <div class="input-group">
+                            <i class='bx bxs-lock-alt'></i>
+                            <input type="password" placeholder="Password">
+                        </div>
+                        <button type="submit">
+                            Sign in
+                        </button>
+                </form>
+                <p>
+                    <b>
+                        Forgot password?
+                    </b>
+                </p>
+                <p>
+                    <span>
+                        Don't have an account?
+                    </span>
+                    <b onclick="toggle()" class="pointer">
+                        Sign up here
+                    </b>
+                </p>
+            </div>
         </div>
-        </form>
+        <div class="form-wrapper">
+
+        </div>
+    </div>
+    <!-- END SIGN IN -->
+    </div>
+    <!-- END FORM SECTION -->
+    <!-- CONTENT SECTION -->
+    <div class="row content-row">
+        <!-- SIGN IN CONTENT -->
+        <div class="col align-items-center flex-col">
+            <div class="text sign-in">
+                <h2>
+                    Welcome
+                </h2>
+
+            </div>
+            <div class="img sign-in">
+
+            </div>
+        </div>
+        <!-- END SIGN IN CONTENT -->
+        <!-- SIGN UP CONTENT -->
+        <div class="col align-items-center flex-col">
+            <div class="img sign-up">
+
+            </div>
+            <div class="text sign-up">
+                <h2>
+                    Join with us
+                </h2>
+
+            </div>
+        </div>
+        <!-- END SIGN UP CONTENT -->
+    </div>
+    <!-- END CONTENT SECTION -->
     </div>
 
+    <script>
+        let container = document.getElementById('container')
+
+        toggle = () => {
+            container.classList.toggle('sign-in')
+            container.classList.toggle('sign-up')
+        }
+
+        setTimeout(() => {
+            container.classList.add('sign-in')
+        }, 200)
+
+        function changeForm() {
+            let role = document.getElementById("roleSelect").value;
+            let teacherForm = document.getElementById("teacherForm");
+            let parentForm = document.getElementById("parentForm");
+
+            teacherForm.style.display = "none";
+            parentForm.style.display = "none";
+
+            if (role === "Teacher") {
+                teacherForm.style.display = "block";
+            }
+
+            if (role === "Parent") {
+                parentForm.style.display = "block";
+            }
+        }
+    </script>
 </body>
 
 </html>

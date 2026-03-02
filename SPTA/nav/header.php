@@ -2,59 +2,210 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <title>Car Wash management System | Home Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Payment Dashboard</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            background: #f4f6f9;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 300px;
+            height: 110vh;
+            background: #386641;
+            color: white;
+            padding: 20px;
+        }
+
+        .sidebar h2 {
+            margin-bottom: 30px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            padding: 12px 0;
+            cursor: pointer;
+        }
+
+        .sidebar ul li:hover {
+            background: #334155;
+            padding-left: 10px;
+            transition: 0.3s;
+        }
+
+        .container {
+            width: auto;
+            background: white;
+            border: 2px solid black;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+        }
+
+        /* RECENT PAYMENTS */
+        .recent-payments {
+            flex: 2;
+        }
+
+        .recent-payments h3 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 70px;
+            border-collapse: collapse;
+            border: 2px solid gray;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        table th,
+        table td {
+            border: 1px solid gray;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        table th {
+            background: #f2f2f2;
+        }
+
+        /*table*/
+        .table-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th,
+        table td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background: #52796f;
+            color: white;
+        }
+
+        table tr:nth-child(even) {
+            background: #f1f5f9;
+        }
 
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/logo" href="../img/logo.png">
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+        /* Main */
+        .main {
+            flex: 1;
+            padding: 20px;
+        }
 
-    <!-- CSS Libraries -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link href="lib/flaticon/font/flaticon.css" rel="stylesheet">
-    <link href="lib/animate/animate.min.css" rel="stylesheet">
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/dist/css/home.css">
+        /* Navbar */
+        .navbar {
+            background: #386641;
+            padding: 30px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
-    <!-- Template Stylesheet -->
+        }
 
+        /* Cards */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 22px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        /* Charts */
+        .charts {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        canvas {
+            width: 100% !important;
+            height: 300px !important;
+        }
+
+        /* STATUS COLORS */
+        .paid {
+            background: #16a34a;
+            color: white;
+            font-weight: bold;
+        }
+w
+        .pending {
+            background: #3b82f6;
+            color: white;
+            font-weight: bold;
+        }
+
+        .overdue {
+            background: #b3002d;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
-
-    <!-- Nav Bar Start -->
-    <div class="nav-bar">
-        <div>
-            <nav class="navbar navbar-expand-lg nav">
-
-                <img src="../img/logs.png"
-                    alt="Philippine Logo" height="90" width="90" style="border-radius:10px">
-
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                    <center>
-                        <div class="navbar-nav mr-auto">
-                            <a class="nav-item nav-link active" href="../page/Home.php"><b>Home</b></a>
-                            <a class="nav-item nav-link" href="../page/About.php"><b>About</b></a>
-                            <a class="nav-item nav-link" href="../page/Services.php"><b>Services</b></a>
-                            <a class="nav-item nav-link" href="../page/location.php"><b>Washing Points</b></a>
-
-                            <a href="../page/Contact.php" class="nav-item nav-link"><b>Contact</b></a>
-                            <a href="../login/login.php" class="nav-item nav-link"><b>admin</b></a>
-                        </div>
-                    </center>
-                    <div class="ml-auto">
-                        <a class="btn btn-custom" href="../views/contact.php">Get Appointment</a>
-                    </div>
-                </div>
-            </nav>
+    <div class="main">
+        <div class="navbar" style="color:white; height:80px; font-size:30px; display: flex; justify-content: center; align-items: center;">
+            <div class="logo">
+                <img src="../img/pawing_logo_circle_no_bg.png" alt="Logo">
+            </div>
+            Pawing Central School System
         </div>
-    </div>
-    <!-- Nav Bar End -->

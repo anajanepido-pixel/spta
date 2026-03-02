@@ -357,14 +357,14 @@
                     <td>3-Jasmine</td>
                     <td>₱500</td>
                     <td>7/15/25</td>
-                    <td>Paid</td>
+                    <td class="paid">Paid</td>
                 </tr>
                 <tr>
                     <td>Student B</td>
                     <td>6-Rose</td>
                     <td>₱500</td>
                     <td>7/10/25</td>
-                    <td>Pending</td>
+                    <td class="pending">Pending</td>
                 </tr>
             </table>
 

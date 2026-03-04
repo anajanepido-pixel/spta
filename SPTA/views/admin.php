@@ -104,6 +104,10 @@
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
       text-align: center;
       margin-top: 5px;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .card h4 {
@@ -422,5 +426,6 @@
 
 
 </body>
+
 
 </html>

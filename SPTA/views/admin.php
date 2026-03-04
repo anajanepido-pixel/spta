@@ -227,6 +227,22 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* STATUS COLORS */
+    .paid {
+      color: #16a34a;
+      font-weight: bold;
+    }
+
+    .pending {
+      color: #f59e0b;
+      font-weight: bold;
+    }
+
+    .overdue {
+      color: #dc2626;
+      font-weight: bold;
+    }
   </style>
 </head>
 
@@ -323,13 +339,19 @@
           <tr>
             <td>John Doe</td>
             <td>2</td>
-            <td>Paid</td>
+            <td class="paid">Paid</td>
             <td>22/06/2023 - 15:11</td>
           </tr>
           <tr>
             <td>Marites Ka</td>
             <td>3</td>
-            <td>Paid</td>
+            <td class="overdue">Overdue</td>
+            <td>03/06/2023 - 15:11</td>
+          </tr>
+          <tr>
+            <td>Marites Ka</td>
+            <td>3</td>
+            <td class="pending">Pending</td>
             <td>03/06/2023 - 15:11</td>
           </tr>
         </table>
@@ -429,3 +451,4 @@
 
 
 </html>
+

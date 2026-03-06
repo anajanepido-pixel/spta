@@ -1,274 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payout Dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPTA Login & Sign Up - Pawing Central School</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-    <style>
-        body {
-            margin: 0;
-            color: #6a6f8c;
-            font: 600 16px/18px 'Open Sans', sans-serif;
-            background-image: url("../img/pawingcs.png");
-            /* your image filename */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            overflow: hidden;
+body {
+    height: 100vh;
+    background: url("../img/pawing.png") no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
 
+body::before {
+    content: "";
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 0;
+}
 
-        }
+/* Flip card container */
+.flip-card {
+    width: 360px;
+    height: 480px;
+    perspective: 1000px;
+    position: relative;
+    z-index: 1;
+}
 
-        *,
-        :after,
-        :before {
-            box-sizing: border-box
-        }
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
 
-        .clearfix:after,
-        .clearfix:before {
-            content: '';
-            display: table
-        }
+.flip-card.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
 
-        .clearfix:after {
-            clear: both;
-            display: block
-        }
+/* Shared card style */
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    color: #fff;
+    text-align: center;
+    padding: 30px 20px;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
 
-        a {
-            color: inherit;
-            text-decoration: none
-        }
+.flip-card-back {
+    transform: rotateY(180deg);
+}
 
-        .login-wrap {
-            width: 100%;
-            margin: auto;
-            min-height: 1000px;
-            position: relative;
-            box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);
-        }
+/* Toggle buttons inside card */
+.toggle-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
 
-        .login-html {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            padding: 90px 70px 50px 70px;
-            background: rgba(40, 57, 101, .9);
-        }
+.toggle-buttons span {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.3s;
+}
 
-        .login-html .sign-in-htm,
-        .login-html .sign-up-htm {
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            position: absolute;
-            transform: rotateY(180deg);
-            backface-visibility: hidden;
-            transition: all .4s linear;
-        }
+.toggle-buttons span.active {
+    color: #fff;
+    text-decoration: underline;
+}
 
-        .login-html .sign-in,
-        .login-html .sign-up,
-        .login-form .group .check {
-            display: none;
-        }
+/* Headings */
+.flip-card h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #fff;
+}
 
-        .login-html .tab,
-        .login-form .group .label,
-        .login-form .group .button {
-            text-transform: uppercase;
-        }
+.school-name {
+    font-size: 14px;
+    margin-bottom: 15px;
+    color: #dcdcdc;
+}
 
-        .login-html .tab {
-            font-size: 22px;
-            margin-right: 15px;
-            padding-bottom: 5px;
-            margin: 0 15px 10px 0;
-            display: inline-block;
-            border-bottom: 2px solid transparent;
-        }
+/* Inputs */
+.input-group {
+    margin-bottom: 12px;
+    text-align: left;
+}
 
-        .login-html .sign-in:checked+.tab,
-        .login-html .sign-up:checked+.tab {
-            color: #fff;
-            border-color: #1161ee;
-        }
+.input-group label {
+    display: block;
+    margin-bottom: 3px;
+    font-weight: 500;
+    color: #e0e0e0;
+    font-size: 13px;
+}
 
-        .login-form {
-            min-height: 345px;
-            position: relative;
-            perspective: 1000px;
-            transform-style: preserve-3d;
-        }
+.input-group input {
+    width: 100%;
+    padding: 9px 12px;
+    border: none;
+    border-radius: 6px;
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+    transition: background 0.3s ease;
+}
 
-        .login-form .group {
-            margin-bottom: 15px;
-        }
+.input-group input::placeholder {
+    color: #ddd;
+}
 
-        .login-form .group .label,
-        .login-form .group .input,
-        .login-form .group .button {
-            width: 300px;
-            color: #fff;
-            display: block;
-        }
+.input-group input:focus {
+    background: rgba(255,255,255,0.35);
+}
 
-        .login-form .group .input,
-        .login-form .group .button {
-            border: none;
-            padding: 15px 20px;
-            border-radius: 25px;
-            background: rgba(255, 255, 255, .1);
-        }
+/* Button */
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    background: #007BFF;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
 
-        .login-form .group input[data-type="password"] {
-            text-security: circle;
-            -webkit-text-security: circle;
-        }
+.login-btn:hover {
+    background: #0056b3;
+    transform: scale(1.02);
+}
 
-        .login-form .group .label {
-            color: #aaa;
-            font-size: 12px;
-        }
+/* Footer */
+.footer-text {
+    margin-top: auto;
+    font-size: 12px;
+    color: #ccc;
+}
 
-        .login-form .group .button {
-            background: #1161ee;
-        }
-
-        .login-form .group label .icon {
-            width: 15px;
-            height: 15px;
-            border-radius: 2px;
-            position: relative;
-            display: inline-block;
-            background: rgba(255, 255, 255, .1);
-        }
-
-        .login-form .group label .icon:before,
-        .login-form .group label .icon:after {
-            content: '';
-            width: 10px;
-            height: 2px;
-            background: #fff;
-            position: absolute;
-            transition: all .2s ease-in-out 0s;
-        }
-
-        .login-form .group label .icon:before {
-            left: 3px;
-            width: 5px;
-            bottom: 6px;
-            transform: scale(0) rotate(0);
-        }
-
-        .login-form .group label .icon:after {
-            top: 6px;
-            right: 0;
-            transform: scale(0) rotate(0);
-        }
-
-        .login-form .group .check:checked+label {
-            color: #fff;
-        }
-
-        .login-form .group .check:checked+label .icon {
-            background: #1161ee;
-        }
-
-        .login-form .group .check:checked+label .icon:before {
-            transform: scale(1) rotate(45deg);
-        }
-
-        .login-form .group .check:checked+label .icon:after {
-            transform: scale(1) rotate(-45deg);
-        }
-
-        .login-html .sign-in:checked+.tab+.sign-up+.tab+.login-form .sign-in-htm {
-            transform: rotate(0);
-        }
-
-        .login-html .sign-up:checked+.tab+.login-form .sign-up-htm {
-            transform: rotate(0);
-        }
-
-        .foot-lnk {
-            text-align: center;
-        }
-
-        .box {
-            margin-left: 40%;
-            width: 400px;
-            height: 400px;
-            align-items: center;
-            margin-top: 10%;
-        }
-    </style>
+/* Responsive */
+@media(max-width:420px) {
+    .flip-card {
+        width: 90%;
+        height: auto;
+    }
+    .flip-card-front, .flip-card-back {
+        padding: 25px 15px;
+    }
+    .toggle-buttons span {
+        font-size: 15px;
+    }
+    .flip-card h2 {
+        font-size: 20px;
+    }
+    .school-name {
+        font-size: 13px;
+    }
+    .input-group label {
+        font-size: 12px;
+    }
+    .input-group input {
+        font-size: 13px;
+        padding: 8px 10px;
+    }
+    .login-btn {
+        font-size: 14px;
+        padding: 9px;
+    }
+}
+</style>
 </head>
-
 <body>
 
-    <div class="login-wrap">
-        <div class="login-html ">
-            <div class="box">
-                <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
-                <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
-                <div class="login-form">
-                    <div class="sign-in-htm">
-                        <div class="group">
-                            <label for="user" class="label">Username</label>
-                            <input id="user" type="text" class="input">
-                        </div>
-                        <div class="group">
-                            <label for="pass" class="label">Password</label>
-                            <input id="pass" type="password" class="input" data-type="password">
-                        </div>
-                        <div class="group">
-                            <input id="check" type="checkbox" class="check" checked>
-                            <label for="check"><span class="icon"></span> Keep me Signed in</label>
-                        </div>
-                        <div class="group">
-                            <input type="submit" class="button" value="Sign In">
-                        </div>
-                        <div class="hr"></div>
-                        <div class="foot-lnk">
-                            <a href="#forgot">Forgot Password?</a>
-                        </div>
-                    </div>
-                    <div class="sign-up-htm">
-                        <div class="group">
-                            <label for="user" class="label">Username</label>
-                            <input id="user" type="text" class="input">
-                        </div>
-                        <div class="group">
-                            <label for="pass" class="label">Password</label>
-                            <input id="pass" type="password" class="input" data-type="password">
-                        </div>
-                        <div class="group">
-                            <label for="pass" class="label">Repeat Password</label>
-                            <input id="pass" type="password" class="input" data-type="password">
-                        </div>
-                        <div class="group">
-                            <label for="pass" class="label">Email Address</label>
-                            <input id="pass" type="text" class="input">
-                        </div>
-                        <div class="group">
-                            <input type="submit" class="button" value="Sign Up">
-                        </div>
-                        <div class="hr"></div>
-                        <div class="foot-lnk">
-                            <label for="tab-1">Already Member?</a>
-                        </div>
-                    </div>
+<div class="flip-card" id="flipCard">
+    <div class="flip-card-inner">
+
+        <!-- Sign In -->
+        <div class="flip-card-front">
+            <div class="toggle-buttons">
+                <span id="signInBtn" class="active">Sign In</span><span id="signUpBtn">Sign Up</span>
+            </div>
+
+            <h2>Welcome Back</h2>
+            <div class="school-name">Pawing Central School</div>
+            <form>
+                <div class="input-group">
+                    <label>Username</label>
+                    <input type="text" placeholder="Enter your username" required>
                 </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="login-btn">Sign In</button>
+            </form>
+            <div class="footer-text">
+                SPTA Management System &copy; 2026
             </div>
         </div>
-    </div>
-</body>
 
+        <!-- Sign Up -->
+        <div class="flip-card-back">
+            <div class="toggle-buttons">
+                <span id="signInBtnBack">Sign In</span><span id="signUpBtnBack" class="active">Sign Up</span>
+            </div> 
+            <h2>Create Account</h2>
+            <div class="school-name">Pawing Central School</div>
+            <form>
+                <div class="input-group">
+                    <label>Username</label>
+                    <input type="text" placeholder="Choose a username" required>
+                </div>
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Create a password" required>
+                </div>
+                <div class="input-group">
+                    <label>Repeat Password</label>
+                    <input type="password" placeholder="Repeat your password" required>
+                </div>
+                <button type="submit" class="login-btn">Sign Up</button>
+            </form>
+            <div class="footer-text">
+                SPTA Management System &copy; 2026
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+const flipCard = document.getElementById('flipCard');
+
+// Front toggle
+const signInBtn = document.getElementById('signInBtn');
+const signUpBtn = document.getElementById('signUpBtn');
+
+// Back toggle
+const signInBtnBack = document.getElementById('signInBtnBack');
+const signUpBtnBack = document.getElementById('signUpBtnBack');
+
+signUpBtn.addEventListener('click', () => flipCard.classList.add('flipped'));
+signInBtn.addEventListener('click', () => flipCard.classList.remove('flipped'));
+signUpBtnBack.addEventListener('click', () => flipCard.classList.add('flipped'));
+signInBtnBack.addEventListener('click', () => flipCard.classList.remove('flipped'));
+
+// Update active toggle colors
+flipCard.addEventListener('transitionend', () => {
+    if(flipCard.classList.contains('flipped')) {
+        signUpBtn.classList.add('active'); signInBtn.classList.remove('active');
+    } else {
+        signInBtn.classList.add('active'); signUpBtn.classList.remove('active');
+    }
+});
+</script>
+
+</body>
 </html>
